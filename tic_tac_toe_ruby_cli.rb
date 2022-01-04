@@ -45,15 +45,14 @@ class Tictactoe
         puts "Congratulations!!\nPlayer #{winner} wins the game."
       else
         if (1..9).include?(pos = user_input(player))
+          user_turn
           if check_if_position_is_empty(pos)
             row, col = board_postion(pos)
             $boards[row][col] = player
             show_board
             $turn += 1
-            user_turn
           else
             puts "This field is already filled! \nSelect an Empty field."
-            user_turn
           end
         else
           puts "Invalid Input! \nEnter a valid position between 1 and 9."
@@ -102,19 +101,10 @@ class Tictactoe
     win = 0
     [0, 1, 2].each do |i|
       # for i in (0..2)
-      if !$boards[i].include?('') && $boards[i].uniq.length == 1
-        win += 1
-      end
-
-      if !$boards.transpose[i].include?('') && $boards.transpose[i].uniq.length == 1
-        win += 1
-      end
-            
-      if !$boards[i].include?('') && [$boards[0][0], $boards[1][1], $boards[2][2]].uniq.length == 1
-        win += 1
-      end
-
-      if !$boards[i].include?('') && [$boards[0][2], $boards[1][1], $boards[2][0]].uniq.length == 1
+      if (!$boards[i].include?('') && $boards[i].uniq.length == 1) ||
+         (!$boards.transpose[i].include?('') && $boards.transpose[i].uniq.length == 1) ||
+         (!$boards[i].include?('') && [$boards[0][0], $boards[1][1], $boards[2][2]].uniq.length == 1) ||
+         (!$boards[i].include?('') && [$boards[0][2], $boards[1][1], $boards[2][0]].uniq.length == 1)
         win += 1
       end
     end
