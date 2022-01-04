@@ -5,3 +5,16 @@ GlobalVars:
 
 AllCops:
   NewCops: enable
+
+Metrics/MethodLength:
+  Max: 100
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
