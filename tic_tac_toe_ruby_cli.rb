@@ -113,5 +113,5 @@ end
 puts '##################################################'
 puts '      Welcome to the Game of Tic Tac Toe!\n'
 puts '##################################################'
-puts '[ Select an Empty field position numbered from 1 to 9]\n '
+puts "[ Select an Empty field position numbered from 1 to 9]\n "
 Tictactoe.new
