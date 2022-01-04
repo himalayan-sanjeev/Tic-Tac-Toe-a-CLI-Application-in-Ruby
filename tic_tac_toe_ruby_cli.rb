@@ -43,30 +43,26 @@ class Tictactoe
       if check_winner
         winner = ($turn % 2).zero? ? 'O' : 'X'
         puts "Congratulations!!\nPlayer #{winner} wins the game."
-      else
-        if (1..9).include?(pos = user_input(player))
-          user_turn
-          if check_if_position_is_empty(pos)
-            row, col = board_postion(pos)
-            $boards[row][col] = player
-            show_board
-            $turn += 1
-          else
-            puts "This field is already filled! \nSelect an Empty field."
-          end
-        else
-          puts "Invalid Input! \nEnter a valid position between 1 and 9."
+      elsif (1..9).include?(pos = user_input(player))
+        user_turn
+        if check_if_position_is_empty(pos)
+          row, col = board_postion(pos)
+          $boards[row][col] = player
           show_board
-          user_turn
+          $turn += 1
+        else
+          puts "This field is already filled! \nSelect an Empty field."
         end
-      end
-    else
-      if check_winner
-        winner = ($turn % 2).zero? ? 'O' : 'X'
-        puts "Congratulations!!\nPlayer #{winner} wins the game."
       else
-        puts "Game Draw!!\n Play it Again!!"
+        puts "Invalid Input! \nEnter a valid position between 1 and 9."
+        show_board
+        user_turn
       end
+    elsif check_winner
+      winner = ($turn % 2).zero? ? 'O' : 'X'
+      puts "Congratulations!!\nPlayer #{winner} wins the game."
+    else
+      puts "Game Draw!!\n Play it Again!!"
     end
   end
 
@@ -101,12 +97,12 @@ class Tictactoe
     win = 0
     [0, 1, 2].each do |i|
       # for i in (0..2)
-      if (!$boards[i].include?('') && $boards[i].uniq.length == 1) ||
-         (!$boards.transpose[i].include?('') && $boards.transpose[i].uniq.length == 1) ||
-         (!$boards[i].include?('') && [$boards[0][0], $boards[1][1], $boards[2][2]].uniq.length == 1) ||
-         (!$boards[i].include?('') && [$boards[0][2], $boards[1][1], $boards[2][0]].uniq.length == 1)
-        win += 1
-      end
+      next unless (!$boards[i].include?('') && $boards[i].uniq.length == 1) ||
+                  (!$boards.transpose[i].include?('') && $boards.transpose[i].uniq.length == 1) ||
+                  (!$boards[i].include?('') && [$boards[0][0], $boards[1][1], $boards[2][2]].uniq.length == 1) ||
+                  (!$boards[i].include?('') && [$boards[0][2], $boards[1][1], $boards[2][0]].uniq.length == 1)
+
+      win += 1
     end
     win.positive?
   end
