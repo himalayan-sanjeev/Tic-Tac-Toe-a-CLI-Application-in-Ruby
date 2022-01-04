@@ -68,10 +68,11 @@ class Tictactoe
 
   # Locate the Position of User Input in the Game Board
   def board_postion(pos)
-    if (1..3).include? pos
+    case pos
+    when 1..3
       row = 0
       col = (pos % 3) - 1
-    elsif (4..6).include? pos
+    when 4..6
       row = 1
       col = (pos % 3).zero? ? 2 : ((pos % 3) - 1)
     else
