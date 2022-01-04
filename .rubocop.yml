@@ -1,0 +1,7 @@
+GlobalVars:
+  AllowedVariables:
+    - $boards
+    - $turn
+
+AllCops:
+  NewCops: enable
